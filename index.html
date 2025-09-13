@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Youtube Video Downloader</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">YouTube Video/Audio Downloader</h1>
+        <div class="input-group">
+            <input class="url-input" type="text" id="url" placeholder="Enter YouTube video link" size="50">
+        </div>
+            <div class="input-group">
+                <select id="quality" class="quality-select">
+                    <option value="">Select Video Quality</option>
+                    <option value="18">360p (with audio)</option>
+                    <option value="135">480p (video+audio if available)</option>
+                    <option value="22">720p (with audio)</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button class="download-btn" onclick="download('video')">Download Video</button>
+                <button class="download-btn" onclick="download('audio')">Download Audio</button>
+            </div>
+    </div>
+
+    <script>
+        function download(type) {
+            const url = document.getElementById('url').value;
+            if (!url) {
+                alert('Please enter a YouTube video link.');
+                return;
+            }
+
+            if (type === "video") {
+                const quality = document.getElementById("quality").value;
+                window.location.href = `http://localhost:3000/downloadVideo?url=${encodeURIComponent(url)}&quality=${quality}`;
+            } else {
+                window.location.href = `http://localhost:3000/downloadAudio?url=${encodeURIComponent(url)}`;
+            }
+        }
+    </script>
+</body>
+</html>
